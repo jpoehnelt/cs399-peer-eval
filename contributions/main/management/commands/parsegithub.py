@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from main.models import Project, Student, Contribution
+import time
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -9,9 +10,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         browser = webdriver.Firefox()
-        for project in Project.objects.all():
+        for project in Project.objects.order_by('?'):
 
             # api access is blocked to contributors page unless you have access to push to repo
+            time.sleep(0.5)
             browser.get(project.github)
 
             soup = BeautifulSoup(browser.page_source)
