@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+{% block content %}
+<ul class="list-unstyled">
+    {% for student in students %}
+    <li>
+        {{ student.github_username }}
+        <ul>
+            {% for contribution in student.contributions %}
+                {{ contribution.commits }}
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
